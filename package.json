@@ -1,0 +1,29 @@
+{
+  "name": "noplace-verify-seyfert",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@libsql/client": "^0.7.0",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.32.0",
+    "seyfert": "^1.5.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "drizzle-kit": "^0.23.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.16.2"
+  }
+}
