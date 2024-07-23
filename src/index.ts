@@ -9,7 +9,7 @@ client.start().then(async () => {
     client.gateway.setPresence({
         activities: [{
             type: ActivityType.Playing,
-            name: "on noplace.app!",
+            name: "on noplace.live!",
             state: " ",
         }],
         afk: false,
