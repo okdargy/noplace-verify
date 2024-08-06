@@ -29,15 +29,11 @@ const options = {
     defaultMemberPermissions: ['ManageGuild']
 })
 @Options(options)
-export default class PingCommand extends Command {
+export default class SetupCommand extends Command {
     async run(ctx: CommandContext<typeof options>) {
-        
         const verifyRole = ctx.options.role;
-        
         const embedChannel = ctx.options.channel;
-        
         const image = ctx.options.image;
-        
         const color = ctx.options.color;
 
         if (!verifyRole && !embedChannel) {

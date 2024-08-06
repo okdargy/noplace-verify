@@ -29,17 +29,13 @@ role: createRoleOption({
     defaultMemberPermissions: ['ManageGuild']
 })
 @Options(options)
-export default class PingCommand extends Command {
+export default class BadgeRoleCommand extends Command {
     async run(ctx: CommandContext<typeof options>) {
-        
         const action = ctx.options.action;
 
         if (action == "add" || action == "remove") {
-            
             const role = ctx.options.role;
-            
             const badge = ctx.options.badge;
-
             if (!role || !badge) {
                 return ctx.write({
                     content: 'please provide a role and badge to continue',
