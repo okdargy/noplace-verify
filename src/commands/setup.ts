@@ -3,12 +3,7 @@ import { serversTable } from '../db/schema';
 import { Declare, Command, type CommandContext, createRoleOption, createChannelOption, Options, createStringOption, Embed, Button, ActionRow } from 'seyfert';
 import { ButtonStyle, ChannelType, MessageFlags } from 'seyfert/lib/types';
 
-@Declare({
-    name: 'setup',
-    description: 'Setup the verification system for the server',
-    defaultMemberPermissions: ['ManageGuild']
-})
-@Options({
+const options = {
     role: createRoleOption({
         description: 'Role to give to the user after verification',
         required: true
@@ -26,16 +21,23 @@ import { ButtonStyle, ChannelType, MessageFlags } from 'seyfert/lib/types';
         description: 'Color of the embed (hex codes only)',
         required: false
     })
+}
+
+@Declare({
+    name: 'setup',
+    description: 'Setup the verification system for the server',
+    defaultMemberPermissions: ['ManageGuild']
 })
+@Options(options)
 export default class PingCommand extends Command {
-    async run(ctx: CommandContext) {
-        // @ts-expect-error
+    async run(ctx: CommandContext<typeof options>) {
+        
         const verifyRole = ctx.options.role;
-        // @ts-expect-error
+        
         const embedChannel = ctx.options.channel;
-        // @ts-expect-error
+        
         const image = ctx.options.image;
-        // @ts-expect-error
+        
         const color = ctx.options.color;
 
         if (!verifyRole && !embedChannel) {
@@ -153,6 +155,6 @@ const isURL = (str: string) => {
     return str.length < 2083 && url.test(str);
 }
 
-const isHexCode = (str: string) => {
+const isHexCode = (str: string): str is `#${string}` => {
     return /^#[0-9A-F]{6}$/i.test(str);
 }

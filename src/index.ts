@@ -1,4 +1,4 @@
-import { Client } from 'seyfert';
+import { Client, ParseClient } from 'seyfert';
 import { ActivityType, PresenceUpdateStatus } from 'seyfert/lib/types';
 
 const client = new Client();
@@ -17,3 +17,7 @@ client.start().then(async () => {
         status: PresenceUpdateStatus.Online,
     })
 });
+
+declare module "seyfert" {
+    interface UsingClient extends ParseClient<Client<true>> {}
+}
