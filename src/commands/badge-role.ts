@@ -5,39 +5,39 @@ import { db } from '../db';
 import { serverBadgeRoles } from '../db/schema';
 import { and, eq } from 'drizzle-orm';
 
+const options = { action: createStringOption({
+    choices: [
+        { name: "add", value: "add" },
+        { name: "remove", value: "remove" },
+        { name: "list", value: "list" }
+    ],
+    description: 'The action to perform',
+    required: true
+}),
+badge: createStringOption({
+    description: 'The badge to assign a role to',
+    required: false
+}),
+role: createRoleOption({
+    description: 'The role to assign to the user',
+    required: false
+})}
+
 @Declare({
     name: 'badge-role',
     description: 'Assigns a role to a badge if a user has it.',
     defaultMemberPermissions: ['ManageGuild']
 })
-@Options({
-    action: createStringOption({
-        choices: [
-            { name: "add", value: "add" },
-            { name: "remove", value: "remove" },
-            { name: "list", value: "list" }
-        ],
-        description: 'The action to perform',
-        required: true
-    }),
-    badge: createStringOption({
-        description: 'The badge to assign a role to',
-        required: false
-    }),
-    role: createRoleOption({
-        description: 'The role to assign to the user',
-        required: false
-    }),
-})
+@Options(options)
 export default class PingCommand extends Command {
-    async run(ctx: CommandContext) {
-        // @ts-expect-error
+    async run(ctx: CommandContext<typeof options>) {
+        
         const action = ctx.options.action;
 
         if (action == "add" || action == "remove") {
-            // @ts-expect-error
+            
             const role = ctx.options.role;
-            // @ts-expect-error
+            
             const badge = ctx.options.badge;
 
             if (!role || !badge) {

@@ -7,7 +7,7 @@ import { Declare, Command, type CommandContext } from 'seyfert';
 export default class PingCommand extends Command {
   async run(ctx: CommandContext) {
     await ctx.write({
-      content: `hi!!`
+      content: `hi!! ${ctx.client.gateway.latency} 🛰️`
     });
   }
 }
